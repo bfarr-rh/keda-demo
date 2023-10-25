@@ -42,7 +42,7 @@ spec:
       metadata:
         brokerAddress: q1
         brokerName: amq-broker
-        managementEndpoint: 'ex-aao-wconsj-1-svc:8161'
+        managementEndpoint: 'ex-aao-wconsj-0-svc:8161'
         queueLength: '1'
         queueName: q1
       type: artemis-queue
@@ -51,7 +51,7 @@ spec:
       metadata:
         brokerAddress: q2
         brokerName: amq-broker
-        managementEndpoint: 'ex-aao-wconsj-1-svc:8161'
+        managementEndpoint: 'ex-aao-wconsj-0-svc:8161'
         queueLength: '1'
         queueName: q2
       type: artemis-queue
