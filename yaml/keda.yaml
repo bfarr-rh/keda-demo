@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kedartemis
+  labels:
+    app: kedartemis
+type: Opaque
+data:
+  artemis-password: "YWRtaW4="
+  artemis-username: "YWRtaW4="
+---
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: trigger-auth-kedartemis
+spec:
+  secretTargetRef:
+    - parameter: username
+      name: kedartemis
+      key: artemis-username
+    - parameter: password
+      name: kedartemis
+      key: artemis-password
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: kedartemis-consumer-scaled-object
+spec:
+  scaleTargetRef:
+    name: pacman-1
+  pollingInterval:  15                       
+  cooldownPeriod:   15                
+  minReplicaCount:  0          
+  maxReplicaCount:  10
+  fallback:                                          
+    failureThreshold: 3                              
+    replicas: 1
+  triggers:
+    - authenticationRef:
+        name: trigger-auth-kedartemis
+      metadata:
+        brokerAddress: q1
+        brokerName: amq-broker
+        managementEndpoint: 'ex-aao-wconsj-1-svc:8161'
+        queueLength: '1'
+        queueName: q1
+      type: artemis-queue
+    - authenticationRef:
+        name: trigger-auth-kedartemis
+      metadata:
+        brokerAddress: q2
+        brokerName: amq-broker
+        managementEndpoint: 'ex-aao-wconsj-1-svc:8161'
+        queueLength: '1'
+        queueName: q2
+      type: artemis-queue
