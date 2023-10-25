@@ -1,0 +1,47 @@
+kind: ActiveMQArtemis
+apiVersion: broker.amq.io/v1beta1
+metadata:
+  application: ex-aao-app
+  name: ex-aao
+spec:
+  adminPassword: admin
+  adminUser: admin
+  console:
+    expose: true
+    sslEnabled: false
+  deploymentPlan:
+    image: placeholder
+    jolokiaAgentEnabled: false
+    journalType: nio
+    managementRBACEnabled: true
+    messageMigration: false
+    persistenceEnabled: true
+    enableMetricsPlugin: true
+    clustered: true
+    requireLogin: false
+    resources:
+      limits:
+        cpu: 1500m
+        memory: 1500Mi
+      requests:
+        cpu: 750m
+        memory: 500Mi
+    size: 1
+---
+kind: ActiveMQArtemisAddress
+apiVersion: broker.amq.io/v1beta1
+metadata:
+  name: ex-aaoaddressq1
+spec:
+  addressName: q1
+  queueName: q1
+  routingType: anycast
+---
+kind: ActiveMQArtemisAddress
+apiVersion: broker.amq.io/v1beta1
+metadata:
+  name: ex-aaoaddressq2
+spec:
+  addressName: q2
+  queueName: q2
+  routingType: anycast
