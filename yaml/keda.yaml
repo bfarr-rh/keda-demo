@@ -7,7 +7,7 @@ metadata:
 type: Opaque
 data:
   artemis-password: "YWRtaW4="
-  artemis-username: "YWRtaW4="
+  artemis-username: "YWRtaW4=" 
 ---
 apiVersion: keda.sh/v1alpha1
 kind: TriggerAuthentication
