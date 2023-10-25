@@ -10,14 +10,21 @@ Once setup you can send a message to either queue via the Fuse broker console an
 
 To set up the demo
 1. Install the AMQ Broker Operator
-2. oc new-project keda-demo
+2. ```oc new-project keda-demo```
 3. Install the custom metrics Operator in the keda-demo project 
 4. Install the broker and queues
-   oc project keda-demo
-   oc apply -f https://raw.githubusercontent.com/bfarr-rh/keda-demo/master/yaml/amq-broker.yaml
-5. Create the application
-   oc new-app https://github.com/redhat-gpte-devopsautomation/pacman-1
-6. Expose the application as a route and test Pacman runs
-7. Create the Scaler Object 
-   oc apply -f https://raw.githubusercontent.com/bfarr-rh/keda-demo/master/yaml/keda.yaml
-8. Navigate to the Fuse console (find the route) and login with admin/admin and use it to send and delete messages from either queue and watch the pods dynamically scale.
+   
+   ```oc project keda-demo```
+   
+   ```oc apply -f https://raw.githubusercontent.com/bfarr-rh/keda-demo/master/yaml/amq-broker.yaml```
+   
+6. Create the application
+   
+   ```oc new-app https://github.com/redhat-gpte-devopsautomation/pacman-1```
+   
+8. Expose the application as a route and test Pacman runs
+9. Create the Scaler Object
+    
+   ```oc apply -f https://raw.githubusercontent.com/bfarr-rh/keda-demo/master/yaml/keda.yaml```
+   
+11. Navigate to the Fuse console (find the route) and login with admin/admin and use it to send and delete messages from either queue and watch the pods dynamically scale.
